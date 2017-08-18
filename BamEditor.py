@@ -99,7 +99,8 @@ class PaletteColorButton(Button):
 
              if touch.button == "right":
                  root.ids['right_mouse_color'].color = self.color
-
+             if touch.button == "left":
+                 root.ids['left_mouse_color'].color = self.color
 
 class CurrentColorLabel(ToolBarLabel):
     pass
@@ -110,6 +111,7 @@ class ColorPickerPopup(Popup):
         self.my_widget = my_widget
     def on_dismiss(self):
         self.my_widget.color = self.color
+        root.ids['left_mouse_color'].color = self.color
 
 
 class BamEditor(App):
