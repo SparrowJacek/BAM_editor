@@ -22,35 +22,35 @@
 <NewFileButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\new-icon.png'
+        source: r'.\static\icons\new-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
 <OpenFileButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\open-file-icon.png'
+        source: r'.\static\icons\open-file-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
 <SaveFileButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\save-icon.png'
+        source: r'.\static\icons\save-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
 <UndoButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\undo-icon.png'
+        source: r'.\static\icons\undo-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
 <RedoButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\redo-icon.png'
+        source: r'.\static\icons\redo-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
@@ -62,7 +62,7 @@
 
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\Pencil-icon.png'
+        source: r'.\static\icons\Pencil-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
@@ -72,7 +72,7 @@
 
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\Eraser-icon.png'
+        source: r'.\static\icons\Eraser-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
@@ -92,7 +92,7 @@
 
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\Dropper-icon.png'
+        source: r'.\static\icons\Dropper-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
@@ -101,21 +101,21 @@
 
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\Fill-icon.png'
+        source: r'.\static\icons\Fill-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
 <ZoomInButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\Zoom-in-icon.png'
+        source: r'.\static\icons\Zoom-in-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
 <ZoomOutButton>:
     size: 32, 32
     Image:
-        source: r'E:\kivy_projects\first_kivy_project\static\icons\Zoom-out-icon.png'
+        source: r'.\static\icons\Zoom-out-icon.png'
         pos: root.x, root.top - self.height
         size: self.parent.size
 
@@ -139,9 +139,26 @@
 <PaletteColorButton>:
     size:(20,20)
     canvas.after:
+        Color:
+            rgba: self.color
         Rectangle:
             pos: self.x + 1 , self.y + 1
             size: self.width - 2, self.height - 2
+
+
+<ColorPickerPopup>:
+    title: 'Color Select'
+    size_hint: None, None
+    size: 400,400
+    auto_dismiss: False
+    ColorPicker:
+        on_color:root.color = self.color
+        Button:
+            text: 'Select'
+            pos_hint: {'center_x': .76, 'y': .03}
+            size_hint: None, None
+            size: 100, 50
+            on_press: root.dismiss()
 
 <MainLabel>:
 
