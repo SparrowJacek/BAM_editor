@@ -7,6 +7,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
+from kivy.uix.scatter import Scatter
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
@@ -52,13 +53,27 @@ class ColorPickerButton(ToggleButton):
 class FloodFillButton(ToggleButton):
     pass
 
-class ZoomInButton(Button):
+class ImageCenterButton(ToggleButton):
     pass
+
+class ZoomInButton(Button):
+    def on_press(self):
+        if root.ids['imagescatter'].scale < 8:
+            root.ids['imagescatter'].scale *= 2
 
 class ZoomOutButton(Button):
-    pass
+    def on_press(self):
+        if root.ids['imagescatter'].scale > 1:
+            root.ids['imagescatter'].scale *= 0.5
+
 
 class PaintingAreaLabel(Label):
+    pass
+
+class ImageScatter(Scatter):
+    pass
+
+class ImageLabel(Label):
     pass
 
 class PaletteInfoLabel(ToolBarLabel):
@@ -84,7 +99,6 @@ class PaletteColorButton(Button):
 
              if touch.button == "right":
                  root.ids['right_mouse_color'].color = self.color
-
 
 
 class CurrentColorLabel(ToolBarLabel):
