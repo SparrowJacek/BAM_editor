@@ -1,0 +1,204 @@
+# File name: BamEditor.py
+<ToolBarLabel>
+    bcolor: 103/255, 97/255, 97/255, 1
+    canvas.before:
+        Color:
+            rgba: 73/255, 67/255, 67/255, 1
+        Rectangle:
+            pos: self.x , self.y
+            size: self.width, self.height
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.x + 3, self.y +3
+            size: self.width-6, self.height-6
+
+
+
+<MainToolbarLabel@ToolBarLabel>:
+    height: 38
+
+
+<NewFileButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\new-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<OpenFileButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\open-file-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<SaveFileButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\save-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<UndoButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\undo-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<RedoButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\redo-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ToolBoxLabel@ToolBarLabel>:
+    width: 38
+
+<PencilButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Pencil-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<EraserButton>:
+    group: 'toolbox_tool'
+
+
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Eraser-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<BrushButton>:
+    group: 'toolbox_tool'
+
+
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Brush-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ColorPickerButton>:
+    group: 'toolbox_tool'
+
+
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Dropper-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<FloodFillButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Fill-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ZoomInButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Zoom-in-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ZoomOutButton>:
+    size: 32, 32
+    Image:
+        source: r'E:\kivy_projects\first_kivy_project\static\icons\Zoom-out-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<PaintingAreaLabel>:
+    bcolor: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.x , self.y
+            size: self.width, self.height
+
+<PaletteInfoLabel>:
+    height: 200
+
+<PaletteLabel>:
+    height: 160
+    width: 640
+
+
+<PaletteColorButton>:
+    size:(20,20)
+    canvas.after:
+        Rectangle:
+            pos: self.x + 1 , self.y + 1
+            size: self.width - 2, self.height - 2
+
+<MainLabel>:
+
+    MainToolbarLabel:
+        id: maintoolbar
+        width: root.width
+        pos: root.x, root.top - self.height
+
+        NewFileButton:
+            pos: root.x +3 , root.top - self.height -3
+        OpenFileButton:
+            pos: root.x + self.width + 3, root.top - self.height -3
+        SaveFileButton:
+            pos: root.x + self.width * 2 + 3, root.top - self.height - 3
+        UndoButton:
+            pos: root.x + self.width * 3 + 3, root.top - self.height - 3
+        RedoButton:
+            pos: root.x + self.width * 4 + 3, root.top - self.height - 3
+
+    ToolBoxLabel:
+        id: toolbox
+        pos: root.x, root.top - self.height - 35
+        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height + 6
+
+        PencilButton:
+            pos: self.parent.x +3 , self.parent.top - self.height -3
+        EraserButton:
+            pos: self.parent.x +3 , self.parent.top - 2 * self.height -3
+        BrushButton:
+            pos: self.parent.x +3 , self.parent.top - 3 * self.height -3
+        ColorPickerButton:
+            pos: self.parent.x +3 , self.parent.top - 4 * self.height -3
+        FloodFillButton:
+            pos: self.parent.x +3 , self.parent.top - 5 * self.height -3
+        ZoomInButton:
+            pos: self.parent.x +3 , self.parent.top - 6 * self.height -3
+        ZoomOutButton:
+            pos: self.parent.x +3 , self.parent.top - 7 * self.height -3
+
+    PaintingAreaLabel:
+        pos: 38, root.top - 38 - self.height
+        width: root.width - root.ids.toolbox.width
+        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height
+
+    PaletteInfoLabel:
+        id: paletteinfolabel
+        width: root.width
+        pos: 0, 0
+
+        PaletteLabel:
+            id: palettelabel
+            pos: (self.parent.x + 120, self.parent.y + 20)
+
+            GridLayout:
+                id: palettelayout
+                cols: 32
+                rows: 8
+
+                pos: self.parent.x , self.parent.y
+                size: self.parent.width, self.parent.height
