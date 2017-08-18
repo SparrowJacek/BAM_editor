@@ -1,4 +1,6 @@
 from kivy.config import Config
+Config.set('kivy', 'window_icon', r'.\static\program_icon\BamEditor-icon.png')
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from random import random as r
 from kivy.uix.floatlayout import FloatLayout
@@ -75,12 +77,18 @@ class PaletteColorButton(Button):
         print(self.pos)
 
     def on_touch_down(self, touch):
-        if touch.is_double_tap:
-            if self.collide_point(touch.pos[0], touch.pos[1]):
-                print(self.color)
+        if self.collide_point(touch.pos[0], touch.pos[1]):
+             if touch.is_double_tap:
                 color_picker_popup = ColorPickerPopup(self)
                 color_picker_popup.open()
 
+             if touch.button == "right":
+                 root.ids['right_mouse_color'].color = self.color
+
+
+
+class CurrentColorLabel(ToolBarLabel):
+    pass
 
 class ColorPickerPopup(Popup):
     def __init__(self,my_widget,**kwargs):  # my_widget is now the object where popup was called from.
@@ -91,11 +99,15 @@ class ColorPickerPopup(Popup):
 
 
 class BamEditor(App):
-    Config.set('kivy', 'window_icon', r'.\static\program_icon\BamEditor-icon.png')
+
     def build(self):
         main_label = MainLabel()
+        global root
+        root = main_label
+
         main_label.ids['palettelabel'].make_palette(main_label.ids['palettelayout'])
         return main_label
+
 
 if __name__ == '__main__':
     BamEditor().run()

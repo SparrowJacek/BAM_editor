@@ -160,6 +160,18 @@
             size: 100, 50
             on_press: root.dismiss()
 
+
+<CurrentColorLabel>:
+    size: (80, 80)
+    canvas.after:
+        Color:
+            rgba: self.color
+        Rectangle:
+            pos: self.x + 3 , self.y + 3
+            size: self.width - 6, self.height - 6
+
+
+
 <MainLabel>:
 
     MainToolbarLabel:
@@ -210,7 +222,7 @@
 
         PaletteLabel:
             id: palettelabel
-            pos: (self.parent.x + 120, self.parent.y + 20)
+            pos: (self.parent.x + 160, self.parent.y + 20)
 
             GridLayout:
                 id: palettelayout
@@ -219,3 +231,13 @@
 
                 pos: self.parent.x , self.parent.y
                 size: self.parent.width, self.parent.height
+
+        CurrentColorLabel:
+            id: right_mouse_color
+            pos: self.parent.x + 60 , self.parent.y + 40
+            color: 1,1,1,1
+
+        CurrentColorLabel:
+            id: left_mouse_color
+            pos: self.parent.x + 20 , self.parent.y + 80
+            color: 0,0,0,1
