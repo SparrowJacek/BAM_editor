@@ -9,6 +9,7 @@ from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.scatter import Scatter
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
@@ -174,6 +175,15 @@ class SequenceLabel(Label):
     pass
 
 class SequenceFrameButtonsLabel(ToolBarLabel):
+    pass
+
+class SequenceAnimationPlayButton(Button):
+    pass
+
+class SequenceAnimationStopButton(Button):
+    pass
+
+class PreviewAnimationButton(Button):
     pass
 
 class FrameLabel(Label):
