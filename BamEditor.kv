@@ -186,12 +186,13 @@
             pos: self.x + 3 , self.y + 3
             size: self.width - 6, self.height - 6
 
-
+<SequenceFrameInfoLabel>:
+    width: 160
 
 <MainLabel>:
     PaintingAreaLabel:
         pos: 38, root.top - 38 - self.height
-        width: root.width - root.ids.toolbox.width
+        width: root.width - root.ids.toolbox.width - root.ids.sequenceframeinfolabel.width
         height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height
 
         ImageScatter:
@@ -278,3 +279,8 @@
             id: left_mouse_color
             pos: self.parent.x + 20 , self.parent.y + 80
             color: 0,0,0,1
+
+        SequenceFrameInfoLabel:
+            id: sequenceframeinfolabel
+            height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height + 6
+            pos: root.width - self.width, root.ids.paletteinfolabel.height - 3
