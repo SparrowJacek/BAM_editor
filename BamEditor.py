@@ -4,6 +4,7 @@ Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from random import random as r
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
@@ -164,6 +165,9 @@ class ColorPickerPopup(Popup):
         root.ids['left_mouse_color'].color = self.color
 
 class SequenceFrameInfoLabel(ToolBarLabel):
+    pass
+
+class SequenceFrameTabbedPanel(TabbedPanel):
     pass
 
 class BamEditor(App):

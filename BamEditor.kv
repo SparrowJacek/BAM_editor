@@ -187,7 +187,7 @@
             size: self.width - 6, self.height - 6
 
 <SequenceFrameInfoLabel>:
-    width: 160
+    width: 200
 
 <MainLabel>:
     PaintingAreaLabel:
@@ -284,3 +284,15 @@
             id: sequenceframeinfolabel
             height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height + 6
             pos: root.width - self.width, root.ids.paletteinfolabel.height - 3
+
+            SequenceFrameTabbedPanel:
+                size: root.ids.sequenceframeinfolabel.size
+                pos: root.ids.sequenceframeinfolabel.pos
+
+                do_default_tab: False
+
+                TabbedPanelItem:
+                    text: 'Sequences'
+
+                TabbedPanelItem:
+                    text: 'All frames'
