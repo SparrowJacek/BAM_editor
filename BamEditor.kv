@@ -191,14 +191,17 @@
             id: imagescatter
             size: self.parent.size
             pos: self.parent.pos
+            scale_max: 8
+            scale_min: 1
 
             ImageLabel:
                 size: 32, 32
                 pos: (self.parent.width - self.width)/2, (self.parent.height - self.height)/2
                 canvas:
+                    Color:
+                        rgba: 1, 1, 1, 1
                     Rectangle:
                         size: self.size
-                        source: r'.\static\icons\Zoom-out-icon.png'
                         pos: self.pos
 
     MainToolbarLabel:

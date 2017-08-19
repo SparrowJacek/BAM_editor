@@ -58,20 +58,24 @@ class ImageCenterButton(ToggleButton):
 
 class ZoomInButton(Button):
     def on_press(self):
-        if root.ids['imagescatter'].scale < 8:
-            root.ids['imagescatter'].scale *= 2
+        root.ids['imagescatter'].scale *= 2
 
 class ZoomOutButton(Button):
     def on_press(self):
-        if root.ids['imagescatter'].scale > 1:
-            root.ids['imagescatter'].scale *= 0.5
-
+        root.ids['imagescatter'].scale *= 0.5
 
 class PaintingAreaLabel(Label):
     pass
 
 class ImageScatter(Scatter):
-    pass
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            if touch.button == 'scrollup':
+                if self.scale > self.scale_min:
+                    self.scale *= 0.5
+            if touch.button == 'scrolldown':
+                if self.scale < self.scale_max:
+                    self.scale *= 2
 
 class ImageLabel(Label):
     pass
@@ -92,7 +96,7 @@ class PaletteColorButton(Button):
         print(self.pos)
 
     def on_touch_down(self, touch):
-        if self.collide_point(touch.pos[0], touch.pos[1]):
+        if self.collide_point(*touch.pos):
              if touch.is_double_tap:
                 color_picker_popup = ColorPickerPopup(self)
                 color_picker_popup.open()
