@@ -58,11 +58,18 @@ class ImageCenterButton(ToggleButton):
 
 class ZoomInButton(Button):
     def on_press(self):
-        root.ids['imagescatter'].scale *= 2
+        if root.ids['imagescatter'].scale < root.ids['imagescatter'].scale_max:
+            root.ids['imagescatter'].scale *= 2
 
 class ZoomOutButton(Button):
     def on_press(self):
-        root.ids['imagescatter'].scale *= 0.5
+        if root.ids['imagescatter'].scale > root.ids['imagescatter'].scale_min:
+            root.ids['imagescatter'].scale *= 0.5
+
+class ScatterCenterButton(Button):
+    def on_press(self):
+        root.ids['imagescatter'].scale = 1
+        root.ids['imagescatter'].pos = root.ids['imagescatter'].parent.pos
 
 class PaintingAreaLabel(Label):
     pass
@@ -76,7 +83,46 @@ class ImageScatter(Scatter):
             if touch.button == 'scrolldown':
                 if self.scale < self.scale_max:
                     self.scale *= 2
+            x, y = touch.x, touch.y
 
+                    # if the touch isnt on the widget we do nothing
+            if not self.do_collide_after_children:
+                if not self.collide_point(x, y):
+                    return False
+
+            # let the child widgets handle the event if they want
+            touch.push()
+            touch.apply_transform_2d(self.to_local)
+            if super(Scatter, self).on_touch_down(touch):
+                # ensure children don't have to do it themselves
+                if 'multitouch_sim' in touch.profile:
+                    touch.multitouch_sim = True
+                touch.pop()
+                self._bring_to_front(touch)
+                return True
+            touch.pop()
+
+            # if our child didn't do anything, and if we don't have any active
+            # interaction control, then don't accept the touch.
+            if not self.do_translation_x and \
+                    not self.do_translation_y and \
+                    not self.do_rotation and \
+                    not self.do_scale:
+                return False
+
+            if self.do_collide_after_children:
+                if not self.collide_point(x, y):
+                    return False
+
+            if 'multitouch_sim' in touch.profile:
+                touch.multitouch_sim = True
+            # grab the touch so we get all it later move events for sure
+            self._bring_to_front(touch)
+            touch.grab(self)
+            self._touches.append(touch)
+            self._last_touch_pos[touch] = touch.pos
+
+            return True
 class ImageLabel(Label):
     pass
 

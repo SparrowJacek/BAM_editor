@@ -128,6 +128,13 @@
         pos: root.x, root.top - self.height
         size: self.parent.size
 
+<ScatterCenterButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\Revert-center-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
 <PaintingAreaLabel>:
     bcolor: 0.9, 0.9, 0.9, 1
     canvas.before:
@@ -241,6 +248,9 @@
             pos: self.parent.x +3 , self.parent.top - 7 * self.height -3
         ZoomOutButton:
             pos: self.parent.x +3 , self.parent.top - 8 * self.height -3
+        ScatterCenterButton:
+            pos: self.parent.x +3 , self.parent.top - 9 * self.height -3
+
 
     PaletteInfoLabel:
         id: paletteinfolabel
