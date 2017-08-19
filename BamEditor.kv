@@ -105,6 +105,15 @@
         pos: root.x, root.top - self.height
         size: self.parent.size
 
+<ImageCenterButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\Center-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
 <ZoomInButton>:
     size: 32, 32
     Image:
@@ -119,8 +128,15 @@
         pos: root.x, root.top - self.height
         size: self.parent.size
 
+<ScatterCenterButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\Revert-center-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
 <PaintingAreaLabel>:
-    bcolor: 1, 1, 1, 1
+    bcolor: 0.9, 0.9, 0.9, 1
     canvas.before:
         Color:
             rgba: self.bcolor
@@ -173,6 +189,27 @@
 
 
 <MainLabel>:
+    PaintingAreaLabel:
+        pos: 38, root.top - 38 - self.height
+        width: root.width - root.ids.toolbox.width
+        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height
+
+        ImageScatter:
+            id: imagescatter
+            size: self.parent.size
+            pos: self.parent.pos
+            scale_max: 8
+            scale_min: 1
+
+            ImageLabel:
+                size: 32, 32
+                pos: (self.parent.width - self.width)/2, (self.parent.height - self.height)/2
+                canvas:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
 
     MainToolbarLabel:
         id: maintoolbar
@@ -205,15 +242,15 @@
             pos: self.parent.x +3 , self.parent.top - 4 * self.height -3
         FloodFillButton:
             pos: self.parent.x +3 , self.parent.top - 5 * self.height -3
-        ZoomInButton:
+        ImageCenterButton:
             pos: self.parent.x +3 , self.parent.top - 6 * self.height -3
-        ZoomOutButton:
+        ZoomInButton:
             pos: self.parent.x +3 , self.parent.top - 7 * self.height -3
+        ZoomOutButton:
+            pos: self.parent.x +3 , self.parent.top - 8 * self.height -3
+        ScatterCenterButton:
+            pos: self.parent.x +3 , self.parent.top - 9 * self.height -3
 
-    PaintingAreaLabel:
-        pos: 38, root.top - 38 - self.height
-        width: root.width - root.ids.toolbox.width
-        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height
 
     PaletteInfoLabel:
         id: paletteinfolabel
