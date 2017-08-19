@@ -170,6 +170,15 @@ class SequenceFrameInfoLabel(ToolBarLabel):
 class SequenceFrameTabbedPanel(TabbedPanel):
     pass
 
+class SequenceLabel(Label):
+    pass
+
+class SequenceFrameButtonsLabel(ToolBarLabel):
+    pass
+
+class FrameLabel(Label):
+    pass
+
 class BamEditor(App):
 
     def build(self):

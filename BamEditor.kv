@@ -189,6 +189,27 @@
 <SequenceFrameInfoLabel>:
     width: 200
 
+<SequenceLabel>:
+    width: 200
+    canvas:
+        Color:
+            rgba: 0.4, 0.4, 0.4, 1
+        Rectangle:
+            size: (194, self.height)
+            pos: (self.x + 3, self.y)
+
+<SequenceFrameButtonsLabel>:
+    width: 200
+
+<FrameLabel>:
+    width: 200
+    canvas:
+        Color:
+            rgba: 0.6, 0.6, 0.6, 1
+        Rectangle:
+            size: (194, self.height - 3)
+            pos: (self.x + 3, self.y + 3)
+
 <MainLabel>:
     PaintingAreaLabel:
         pos: 38, root.top - 38 - self.height
@@ -286,13 +307,32 @@
             pos: root.width - self.width, root.ids.paletteinfolabel.height - 3
 
             SequenceFrameTabbedPanel:
-                size: root.ids.sequenceframeinfolabel.size
-                pos: root.ids.sequenceframeinfolabel.pos
+                size: self.parent.size
+                pos: self.parent.pos
 
                 do_default_tab: False
 
                 TabbedPanelItem:
                     text: 'Sequences'
+
+                    BoxLayout:
+                        size_hint_y: 1
+                        size_hint_x: 1
+                        orientation: 'vertical'
+
+                        SequenceLabel:
+                            id: sequencelabel
+                            size_hint_y: 1
+
+                        SequenceFrameButtonsLabel:
+                            id: sequenceframebuttonslabel
+                            height: 38
+                            size_hint: (None, None)
+
+                        FrameLabel:
+                            size_hint_y: 1
+
+
 
                 TabbedPanelItem:
                     text: 'All frames'
