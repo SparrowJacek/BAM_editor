@@ -189,19 +189,23 @@
 <SequenceFrameInfoLabel>:
     width: 200
 
-<SequenceLabel>:
-    width: 200
+<ScrollableLabel>:
     canvas:
         Color:
             rgba: 0.7, 0.7, 0.7, 1
         Rectangle:
-            size: (194, self.height)
-            pos: (self.x + 3, self.y)
+            size: (194, self.height - 3)
+            pos: (self.x + 3, self.y + 3)
+
+<SequenceLabel>:
+    width: 200
 
 <SequenceFrameButtonsLabel>:
     width: 200
 
 <SequenceAnimationPlayButton>:
+    group: 'animation_buttons'
+
     size: 32, 32
     Image:
         source: r'.\static\icons\Play-Pressed-icon.png'
@@ -209,6 +213,8 @@
         size: self.size
 
 <SequenceAnimationStopButton>:
+    group: 'animation_buttons'
+
     size: 32, 32
     Image:
         source: r'.\static\icons\Button-Pause-icon.png'
@@ -223,13 +229,24 @@
         size: self.size
 
 <FrameLabel>:
+    width: 168
+
+<FrameUpButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\arrow-up-icon.png'
+        pos: (self.parent.x - self.parent.width, self.parent.y - self.parent.height)
+        size: self.size
+
+<FrameDownButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\arrow-down-icon.png'
+        pos: (self.parent.x - self.parent.width, self.parent.y - self.parent.height)
+        size: self.size
+
+<AllFramesLabel>:
     width: 200
-    canvas:
-        Color:
-            rgba: 0.7, 0.7, 0.7, 1
-        Rectangle:
-            size: (194, self.height - 3)
-            pos: (self.x + 3, self.y + 3)
 
 <MainLabel>:
     PaintingAreaLabel:
@@ -356,11 +373,11 @@
 
                         SequenceFrameButtonsLabel:
                             id: sequenceframebuttonslabel
-                            height: 38
+                            height: 35
                             size_hint: (None, None)
 
                             GridLayout:
-                                padding:(3, 3)
+                                padding:(2, 2)
                                 pos: self.parent.pos
                                 size: self.parent.size
                                 cols: 2
@@ -378,23 +395,64 @@
 
                                 StackLayout:
                                     pos: self.parent.pos
-                                    orientation: 'rl-tb'
+                                    orientation: 'rl-bt'
                                     PreviewAnimationButton:
                                         size_hint: (None, None)
 
-                        FrameLabel:
-                            size_hint_y: 1
+                        BoxLayout:
+                            pos: self.parent.pos
+                            canvas:
+                                Color:
+                                    rgba: 103/255, 97/255, 97/255, 1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
 
-                            ScrollView:
-                                size: self.parent.size
-                                pos: self.parent.pos
+                            FrameLabel:
+                                size_hint_x: None
+                                size_hint_y: 1
 
-                                GridLayout:
-                                    id: framelayout
-                                    cols: 1
-                                    size_hint_y: None
-                                    height: self.minimum_height
+                                ScrollView:
+                                    size: self.parent.size
+                                    pos: self.parent.pos
+
+                                    GridLayout:
+                                        id: framelayout
+                                        cols: 1
+                                        size_hint_y: None
+                                        height: self.minimum_height
+
+                            FrameOrderChangeLabel:
+                                BoxLayout:
+                                    orientation: 'vertical'
+
+                                    size: self.parent.size
+                                    pos: self.parent.pos
+
+                                    FrameUpButton:
+                                        pos: self.parent.pos
+                                        size_hint_y: None
+
+                                    FrameDownButton:
+                                        pos: self.parent.pos
+                                        size_hint_y: None
+
+                                    Label:
 
 
                 TabbedPanelItem:
                     text: 'All frames'
+
+                    AllFramesLabel:
+                        size_hint_y: 1
+                        size_hint_x: 1
+
+                        ScrollView:
+                            size: self.parent.size
+                            pos: self.parent.pos
+
+                            GridLayout:
+                                id: framelayout
+                                cols: 1
+                                size_hint_y: None
+                                height: self.minimum_height

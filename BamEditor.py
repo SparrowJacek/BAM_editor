@@ -87,16 +87,13 @@ class ImageScatter(Scatter):
                     self.scale *= 2
             x, y = touch.x, touch.y
 
-                    # if the touch isnt on the widget we do nothing
             if not self.do_collide_after_children:
                 if not self.collide_point(x, y):
                     return False
 
-            # let the child widgets handle the event if they want
             touch.push()
             touch.apply_transform_2d(self.to_local)
             if super(Scatter, self).on_touch_down(touch):
-                # ensure children don't have to do it themselves
                 if 'multitouch_sim' in touch.profile:
                     touch.multitouch_sim = True
                 touch.pop()
@@ -104,8 +101,6 @@ class ImageScatter(Scatter):
                 return True
             touch.pop()
 
-            # if our child didn't do anything, and if we don't have any active
-            # interaction control, then don't accept the touch.
             if not self.do_translation_x and \
                     not self.do_translation_y and \
                     not self.do_rotation and \
@@ -118,7 +113,6 @@ class ImageScatter(Scatter):
 
             if 'multitouch_sim' in touch.profile:
                 touch.multitouch_sim = True
-            # grab the touch so we get all it later move events for sure
             self._bring_to_front(touch)
             touch.grab(self)
             self._touches.append(touch)
@@ -171,22 +165,37 @@ class SequenceFrameInfoLabel(ToolBarLabel):
 class SequenceFrameTabbedPanel(TabbedPanel):
     pass
 
-class SequenceLabel(Label):
+class ScrollableLabel(Label):
     pass
 
-class SequenceFrameButtonsLabel(ToolBarLabel):
+class SequenceLabel(ScrollableLabel):
     pass
 
-class SequenceAnimationPlayButton(Button):
+class SequenceFrameButtonsLabel(Label):
     pass
 
-class SequenceAnimationStopButton(Button):
+class SequenceAnimationPlayButton(ToggleButton):
+    pass
+
+class SequenceAnimationStopButton(ToggleButton):
     pass
 
 class PreviewAnimationButton(Button):
     pass
 
-class FrameLabel(Label):
+class FrameLabel(ScrollableLabel):
+    pass
+
+class FrameOrderChangeLabel(ToolBarLabel):
+    pass
+
+class FrameUpButton(Button):
+    pass
+
+class FrameDownButton(Button):
+    pass
+
+class AllFramesLabel(ScrollableLabel):
     pass
 
 class BamEditor(App):
