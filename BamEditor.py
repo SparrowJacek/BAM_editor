@@ -159,6 +159,9 @@ class ColorPickerPopup(Popup):
         self.my_widget.color = self.color
         root.ids['left_mouse_color'].color = self.color
 
+class ToolInfoLabel(ToolBarLabel):
+    pass
+
 class SequenceFrameInfoLabel(ToolBarLabel):
     pass
 
