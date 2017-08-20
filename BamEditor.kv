@@ -211,7 +211,35 @@
             pos: (self.x + 3, self.y + 3)
 
 <SequenceLabel>:
-    width: 200
+    width: 168
+
+<SequenceUpButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\arrow-up-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<SequenceDownButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\arrow-down-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<SequenceAddButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\add-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<SequenceDeleteButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\delete-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
 
 <SequenceFrameButtonsLabel>:
     width: 200
@@ -258,6 +286,23 @@
         pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
         size: self.size
 
+<SequenceFrameAddButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\add-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<SequenceFrameDeleteButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\delete-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<AllFramesLabel>:
+    width: 168
+
 <FrameAddButton>:
     size: 32, 32
     Image:
@@ -271,9 +316,6 @@
         source: r'.\static\icons\delete-icon.png'
         pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
         size: self.size
-
-<AllFramesLabel>:
-    width: 200
 
 <MainLabel>:
     PaintingAreaLabel:
@@ -392,18 +434,53 @@
                     size_hint_x: 1
                     orientation: 'vertical'
 
-                    SequenceLabel:
-                        size_hint_y: 1
+                    BoxLayout:
+                        pos: self.parent.pos
+                        canvas:
+                            Color:
+                                rgba: 103/255, 97/255, 97/255, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
 
-                        ScrollView:
-                            size: self.parent.size
-                            pos: self.parent.pos
+                        SequenceLabel:
+                            size_hint_x: None
+                            size_hint_y: 1
 
-                            GridLayout:
-                                id: sequencelayout
-                                cols: 1
-                                size_hint_y: None
-                                height: self.minimum_height
+                            ScrollView:
+                                size: self.parent.size
+                                pos: self.parent.pos
+
+                                GridLayout:
+                                    id: framelayout
+                                    cols: 1
+                                    size_hint_y: None
+                                    height: self.minimum_height
+
+                        SequenceOrderChangeLabel:
+                            BoxLayout:
+                                orientation: 'vertical'
+
+                                size: self.parent.size
+                                pos: self.parent.pos
+
+                                SequenceUpButton:
+                                    pos: self.parent.pos
+                                    size_hint_y: None
+
+                                SequenceDownButton:
+                                    pos: self.parent.pos
+                                    size_hint_y: None
+
+                                SequenceAddButton:
+                                    pos: self.parent.pos
+                                    size_hint_y: None
+
+                                SequenceDeleteButton:
+                                    pos: self.parent.pos
+                                    size_hint_y: None
+
+                                Label:
 
                     SequenceFrameButtonsLabel:
                         id: sequenceframebuttonslabel
@@ -472,11 +549,11 @@
                                     pos: self.parent.pos
                                     size_hint_y: None
 
-                                FrameAddButton:
+                                SequenceFrameAddButton:
                                     pos: self.parent.pos
                                     size_hint_y: None
 
-                                FrameDeleteButton:
+                                SequenceFrameDeleteButton:
                                     pos: self.parent.pos
                                     size_hint_y: None
 
@@ -486,16 +563,46 @@
             TabbedPanelItem:
                 text: 'All frames'
 
-                AllFramesLabel:
-                    size_hint_y: 1
-                    size_hint_x: 1
+                BoxLayout:
 
-                    ScrollView:
-                        size: self.parent.size
+                    canvas:
+                        Color:
+                            rgba: 103/255, 97/255, 97/255, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    AllFramesLabel:
+                        size_hint_y: 1
+
+
+                        ScrollView:
+                            size: self.parent.size
+                            pos: self.parent.pos
+
+                            GridLayout:
+                                id: framelayout
+                                cols: 1
+                                size_hint_y: None
+                                height: self.minimum_height
+                    ToolBoxLabel:
+                        width: 32
+                        size_hint_x: None
+                        size_hint_y: 1
                         pos: self.parent.pos
 
-                        GridLayout:
-                            id: framelayout
-                            cols: 1
-                            size_hint_y: None
-                            height: self.minimum_height
+                        BoxLayout:
+                            orientation: 'vertical'
+
+                            size: self.parent.size
+                            pos: self.parent.pos
+
+                            FrameAddButton:
+                                pos: self.parent.pos
+                                size_hint_y: None
+
+                            FrameDeleteButton:
+                                pos: self.parent.pos
+                                size_hint_y: None
+
+                            Label:

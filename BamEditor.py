@@ -185,6 +185,21 @@ class ScrollableLabel(Label):
 class SequenceLabel(ScrollableLabel):
     pass
 
+class SequenceOrderChangeLabel(ToolBarLabel):
+    pass
+
+class SequenceUpButton(Button):
+    pass
+
+class SequenceDownButton(Button):
+    pass
+
+class SequenceAddButton(Button):
+    pass
+
+class SequenceDeleteButton(Button):
+    pass
+
 class SequenceFrameButtonsLabel(Label):
     pass
 
@@ -209,13 +224,19 @@ class FrameUpButton(Button):
 class FrameDownButton(Button):
     pass
 
+class SequenceFrameAddButton(Button):
+    pass
+
+class SequenceFrameDeleteButton(Button):
+    pass
+
+class AllFramesLabel(ScrollableLabel):
+    pass
+
 class FrameAddButton(Button):
     pass
 
 class FrameDeleteButton(Button):
-    pass
-
-class AllFramesLabel(ScrollableLabel):
     pass
 
 class BamEditor(App):
