@@ -144,7 +144,7 @@
             pos: self.x , self.y
             size: self.width, self.height
 
-<PaletteInfoLabel>:
+<PaletteInfoToolInfoLabel>:
     height: 200
 
 <PaletteLabel>:
@@ -252,7 +252,7 @@
     PaintingAreaLabel:
         pos: 38, root.top - 38 - self.height
         width: root.width - root.ids.toolbox.width - root.ids.sequenceframeinfolabel.width
-        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height
+        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfotoolinfolabel.height
 
         ImageScatter:
             id: imagescatter
@@ -290,7 +290,7 @@
     ToolBoxLabel:
         id: toolbox
         pos: root.x, root.top - self.height - 35
-        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height + 6
+        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfotoolinfolabel.height + 6
 
         PencilButton:
             pos: self.parent.x +3 , self.parent.top - self.height -3
@@ -312,8 +312,8 @@
             pos: self.parent.x +3 , self.parent.top - 9 * self.height -3
 
 
-    PaletteInfoLabel:
-        id: paletteinfolabel
+    PaletteInfoToolInfoLabel:
+        id: paletteinfotoolinfolabel
         width: root.width
         pos: 0, 0
 
@@ -339,10 +339,12 @@
             pos: self.parent.x + 20 , self.parent.y + 80
             color: 0,0,0,1
 
+
+
     SequenceFrameInfoLabel:
         id: sequenceframeinfolabel
-        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfolabel.height + 6
-        pos: root.width - self.width, root.ids.paletteinfolabel.height - 3
+        height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfotoolinfolabel.height + 6
+        pos: root.width - self.width, root.ids.paletteinfotoolinfolabel.height - 3
 
         SequenceFrameTabbedPanel:
             size: self.parent.size

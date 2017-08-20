@@ -122,7 +122,7 @@ class ImageScatter(Scatter):
 class ImageLabel(Label):
     pass
 
-class PaletteInfoLabel(ToolBarLabel):
+class PaletteInfoToolInfoLabel(ToolBarLabel):
     pass
 
 class PaletteLabel(ToolBarLabel):
