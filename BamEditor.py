@@ -1,4 +1,6 @@
 from kivy.config import Config
+from kivy.uix.behaviors import ToggleButtonBehavior
+
 Config.set('kivy', 'window_icon', r'.\static\program_icon\BamEditor-icon.png')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
@@ -17,7 +19,13 @@ from kivy.uix.popup import Popup
 from kivy.graphics import Color, Rectangle
 from kivy.uix.colorpicker import ColorPicker
 
+class RadioButton(ToggleButton):
 
+    def _do_press(self):
+
+        if self.state == 'normal':
+
+            ToggleButtonBehavior._do_press(self)
 
 class MainLabel(Label):
     pass
@@ -40,19 +48,22 @@ class UndoButton(Button):
 class RedoButton(Button):
     pass
 
-class PencilButton(ToggleButton):
+class MoveImageButton(RadioButton):
     pass
 
-class BrushButton(ToggleButton):
+class PencilButton(RadioButton):
     pass
 
-class EraserButton(ToggleButton):
+class BrushButton(RadioButton):
     pass
 
-class ColorPickerButton(ToggleButton):
+class EraserButton(RadioButton):
     pass
 
-class FloodFillButton(ToggleButton):
+class ColorPickerButton(RadioButton):
+    pass
+
+class FloodFillButton(RadioButton):
     pass
 
 class ImageCenterButton(ToggleButton):
@@ -177,10 +188,10 @@ class SequenceLabel(ScrollableLabel):
 class SequenceFrameButtonsLabel(Label):
     pass
 
-class SequenceAnimationPlayButton(ToggleButton):
+class SequenceAnimationPlayButton(RadioButton):
     pass
 
-class SequenceAnimationStopButton(ToggleButton):
+class SequenceAnimationStopButton(RadioButton):
     pass
 
 class PreviewAnimationButton(Button):

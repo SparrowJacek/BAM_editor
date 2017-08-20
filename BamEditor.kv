@@ -57,6 +57,15 @@
 <ToolBoxLabel@ToolBarLabel>:
     width: 38
 
+<MoveImageButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\Hand-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
 <PencilButton>:
     group: 'toolbox_tool'
 
@@ -295,25 +304,27 @@
         id: toolbox
         pos: root.x, root.top - self.height - 35
         height: root.height - root.ids.maintoolbar.height - root.ids.paletteinfotoolinfolabel.height + 6
-
-        PencilButton:
+        MoveImageButton:
             pos: self.parent.x +3 , self.parent.top - self.height -3
-        EraserButton:
+            state: 'down'
+        PencilButton:
             pos: self.parent.x +3 , self.parent.top - 2 * self.height -3
-        BrushButton:
+        EraserButton:
             pos: self.parent.x +3 , self.parent.top - 3 * self.height -3
-        ColorPickerButton:
+        BrushButton:
             pos: self.parent.x +3 , self.parent.top - 4 * self.height -3
-        FloodFillButton:
+        ColorPickerButton:
             pos: self.parent.x +3 , self.parent.top - 5 * self.height -3
-        ImageCenterButton:
+        FloodFillButton:
             pos: self.parent.x +3 , self.parent.top - 6 * self.height -3
-        ZoomInButton:
+        ImageCenterButton:
             pos: self.parent.x +3 , self.parent.top - 7 * self.height -3
-        ZoomOutButton:
+        ZoomInButton:
             pos: self.parent.x +3 , self.parent.top - 8 * self.height -3
-        ScatterCenterButton:
+        ZoomOutButton:
             pos: self.parent.x +3 , self.parent.top - 9 * self.height -3
+        ScatterCenterButton:
+            pos: self.parent.x +3 , self.parent.top - 10 * self.height -3
 
 
     PaletteInfoToolInfoLabel:
@@ -401,6 +412,7 @@
 
                                 SequenceAnimationStopButton:
                                     size_hint: (None, None)
+                                    state: 'down'
 
                             StackLayout:
                                 pos: self.parent.pos
