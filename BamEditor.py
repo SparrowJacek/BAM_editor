@@ -4,10 +4,12 @@ Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from random import random as r
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.scatter import Scatter
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
@@ -85,16 +87,13 @@ class ImageScatter(Scatter):
                     self.scale *= 2
             x, y = touch.x, touch.y
 
-                    # if the touch isnt on the widget we do nothing
             if not self.do_collide_after_children:
                 if not self.collide_point(x, y):
                     return False
 
-            # let the child widgets handle the event if they want
             touch.push()
             touch.apply_transform_2d(self.to_local)
             if super(Scatter, self).on_touch_down(touch):
-                # ensure children don't have to do it themselves
                 if 'multitouch_sim' in touch.profile:
                     touch.multitouch_sim = True
                 touch.pop()
@@ -102,8 +101,6 @@ class ImageScatter(Scatter):
                 return True
             touch.pop()
 
-            # if our child didn't do anything, and if we don't have any active
-            # interaction control, then don't accept the touch.
             if not self.do_translation_x and \
                     not self.do_translation_y and \
                     not self.do_rotation and \
@@ -116,7 +113,6 @@ class ImageScatter(Scatter):
 
             if 'multitouch_sim' in touch.profile:
                 touch.multitouch_sim = True
-            # grab the touch so we get all it later move events for sure
             self._bring_to_front(touch)
             touch.grab(self)
             self._touches.append(touch)
@@ -164,6 +160,42 @@ class ColorPickerPopup(Popup):
         root.ids['left_mouse_color'].color = self.color
 
 class SequenceFrameInfoLabel(ToolBarLabel):
+    pass
+
+class SequenceFrameTabbedPanel(TabbedPanel):
+    pass
+
+class ScrollableLabel(Label):
+    pass
+
+class SequenceLabel(ScrollableLabel):
+    pass
+
+class SequenceFrameButtonsLabel(Label):
+    pass
+
+class SequenceAnimationPlayButton(ToggleButton):
+    pass
+
+class SequenceAnimationStopButton(ToggleButton):
+    pass
+
+class PreviewAnimationButton(Button):
+    pass
+
+class FrameLabel(ScrollableLabel):
+    pass
+
+class FrameOrderChangeLabel(ToolBarLabel):
+    pass
+
+class FrameUpButton(Button):
+    pass
+
+class FrameDownButton(Button):
+    pass
+
+class AllFramesLabel(ScrollableLabel):
     pass
 
 class BamEditor(App):
