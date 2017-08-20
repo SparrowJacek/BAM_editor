@@ -209,6 +209,12 @@ class FrameUpButton(Button):
 class FrameDownButton(Button):
     pass
 
+class FrameAddButton(Button):
+    pass
+
+class FrameDeleteButton(Button):
+    pass
+
 class AllFramesLabel(ScrollableLabel):
     pass
 

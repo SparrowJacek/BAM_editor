@@ -248,14 +248,28 @@
     size: 32, 32
     Image:
         source: r'.\static\icons\arrow-up-icon.png'
-        pos: (self.parent.x - self.parent.width, self.parent.y - self.parent.height)
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
         size: self.size
 
 <FrameDownButton>:
     size: 32, 32
     Image:
         source: r'.\static\icons\arrow-down-icon.png'
-        pos: (self.parent.x - self.parent.width, self.parent.y - self.parent.height)
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<FrameAddButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\add-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
+        size: self.size
+
+<FrameDeleteButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\delete-icon.png'
+        pos: (self.parent.x - self.parent.width - 2, self.parent.y - self.parent.height - 2)
         size: self.size
 
 <AllFramesLabel>:
@@ -455,6 +469,14 @@
                                     size_hint_y: None
 
                                 FrameDownButton:
+                                    pos: self.parent.pos
+                                    size_hint_y: None
+
+                                FrameAddButton:
+                                    pos: self.parent.pos
+                                    size_hint_y: None
+
+                                FrameDeleteButton:
                                     pos: self.parent.pos
                                     size_hint_y: None
 
