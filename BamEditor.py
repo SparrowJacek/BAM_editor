@@ -122,7 +122,7 @@ class ImageScatter(Scatter):
 class ImageLabel(Label):
     pass
 
-class PaletteInfoLabel(ToolBarLabel):
+class PaletteInfoToolInfoLabel(ToolBarLabel):
     pass
 
 class PaletteLabel(ToolBarLabel):
@@ -158,6 +158,9 @@ class ColorPickerPopup(Popup):
     def on_dismiss(self):
         self.my_widget.color = self.color
         root.ids['left_mouse_color'].color = self.color
+
+class ToolInfoLabel(ToolBarLabel):
+    pass
 
 class SequenceFrameInfoLabel(ToolBarLabel):
     pass
