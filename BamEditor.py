@@ -166,7 +166,7 @@ class ColorPickerPopup(Popup):
     def __init__(self,my_widget,**kwargs):  # my_widget is now the object where popup was called from.
         super(ColorPickerPopup, self).__init__(**kwargs)
         self.my_widget = my_widget
-    def on_dismiss(self):
+    def dismiss_popup(self, root):
         self.my_widget.color = self.color
         root.ids['left_mouse_color'].color = self.color
 
@@ -243,8 +243,6 @@ class BamEditor(App):
 
     def build(self):
         main_label = MainLabel()
-        global root
-        root = main_label
 
         main_label.ids['palettelabel'].make_palette(main_label.ids['palettelayout'])
         return main_label

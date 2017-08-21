@@ -180,6 +180,7 @@
     size_hint: None, None
     size: 400,400
     auto_dismiss: False
+    on_dismiss: self.dismiss_popup(app.root)
     ColorPicker:
         on_color:root.color = self.color
         Button:
