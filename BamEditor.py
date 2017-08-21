@@ -1,4 +1,6 @@
 from kivy.config import Config
+from kivy.uix.behaviors import ToggleButtonBehavior
+
 Config.set('kivy', 'window_icon', r'.\static\program_icon\BamEditor-icon.png')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
@@ -17,7 +19,13 @@ from kivy.uix.popup import Popup
 from kivy.graphics import Color, Rectangle
 from kivy.uix.colorpicker import ColorPicker
 
+class RadioButton(ToggleButton):
 
+    def _do_press(self):
+
+        if self.state == 'normal':
+
+            ToggleButtonBehavior._do_press(self)
 
 class MainLabel(Label):
     pass
@@ -40,36 +48,39 @@ class UndoButton(Button):
 class RedoButton(Button):
     pass
 
-class PencilButton(ToggleButton):
+class MoveImageButton(RadioButton):
     pass
 
-class BrushButton(ToggleButton):
+class PencilButton(RadioButton):
     pass
 
-class EraserButton(ToggleButton):
+class BrushButton(RadioButton):
     pass
 
-class ColorPickerButton(ToggleButton):
+class EraserButton(RadioButton):
     pass
 
-class FloodFillButton(ToggleButton):
+class ColorPickerButton(RadioButton):
+    pass
+
+class FloodFillButton(RadioButton):
     pass
 
 class ImageCenterButton(ToggleButton):
     pass
 
 class ZoomInButton(Button):
-    def on_press(self):
+    def zoom_in(self, root):
         if root.ids['imagescatter'].scale < root.ids['imagescatter'].scale_max:
             root.ids['imagescatter'].scale *= 2
 
 class ZoomOutButton(Button):
-    def on_press(self):
+    def zoom_out(self, root):
         if root.ids['imagescatter'].scale > root.ids['imagescatter'].scale_min:
             root.ids['imagescatter'].scale *= 0.5
 
 class ScatterCenterButton(Button):
-    def on_press(self):
+    def center_scatter(self, root):
         root.ids['imagescatter'].scale = 1
         root.ids['imagescatter'].pos = root.ids['imagescatter'].parent.pos
 
@@ -137,7 +148,7 @@ class PaletteColorButton(Button):
     def pick_color(self, *args):
         print(self.pos)
 
-    def on_touch_down(self, touch):
+    def touch_down_actions(self, touch, root):
         if self.collide_point(*touch.pos):
              if touch.is_double_tap:
                 color_picker_popup = ColorPickerPopup(self)
@@ -155,7 +166,7 @@ class ColorPickerPopup(Popup):
     def __init__(self,my_widget,**kwargs):  # my_widget is now the object where popup was called from.
         super(ColorPickerPopup, self).__init__(**kwargs)
         self.my_widget = my_widget
-    def on_dismiss(self):
+    def dismiss_popup(self, root):
         self.my_widget.color = self.color
         root.ids['left_mouse_color'].color = self.color
 
@@ -174,13 +185,28 @@ class ScrollableLabel(Label):
 class SequenceLabel(ScrollableLabel):
     pass
 
+class SequenceOrderChangeLabel(ToolBarLabel):
+    pass
+
+class SequenceUpButton(Button):
+    pass
+
+class SequenceDownButton(Button):
+    pass
+
+class SequenceAddButton(Button):
+    pass
+
+class SequenceDeleteButton(Button):
+    pass
+
 class SequenceFrameButtonsLabel(Label):
     pass
 
-class SequenceAnimationPlayButton(ToggleButton):
+class SequenceAnimationPlayButton(RadioButton):
     pass
 
-class SequenceAnimationStopButton(ToggleButton):
+class SequenceAnimationStopButton(RadioButton):
     pass
 
 class PreviewAnimationButton(Button):
@@ -198,15 +224,25 @@ class FrameUpButton(Button):
 class FrameDownButton(Button):
     pass
 
+class SequenceFrameAddButton(Button):
+    pass
+
+class SequenceFrameDeleteButton(Button):
+    pass
+
 class AllFramesLabel(ScrollableLabel):
+    pass
+
+class FrameAddButton(Button):
+    pass
+
+class FrameDeleteButton(Button):
     pass
 
 class BamEditor(App):
 
     def build(self):
         main_label = MainLabel()
-        global root
-        root = main_label
 
         main_label.ids['palettelabel'].make_palette(main_label.ids['palettelayout'])
         return main_label
