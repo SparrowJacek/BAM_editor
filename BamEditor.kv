@@ -125,6 +125,7 @@
 
 <ZoomInButton>:
     size: 32, 32
+    on_press: self.zoom_in(app.root)
     Image:
         source: r'.\static\icons\Zoom-in-icon.png'
         pos: root.x, root.top - self.height
@@ -132,6 +133,7 @@
 
 <ZoomOutButton>:
     size: 32, 32
+    on_press: self.zoom_out(app.root)
     Image:
         source: r'.\static\icons\Zoom-out-icon.png'
         pos: root.x, root.top - self.height
@@ -139,6 +141,7 @@
 
 <ScatterCenterButton>:
     size: 32, 32
+    on_press: self.center_scatter(app.root)
     Image:
         source: r'.\static\icons\Revert-center-icon.png'
         pos: root.x, root.top - self.height
@@ -163,6 +166,7 @@
 
 <PaletteColorButton>:
     size:(20,20)
+    on_touch_down: self.touch_down_actions(args[1], app.root)
     canvas.after:
         Color:
             rgba: self.color

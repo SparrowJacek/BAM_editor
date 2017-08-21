@@ -70,17 +70,17 @@ class ImageCenterButton(ToggleButton):
     pass
 
 class ZoomInButton(Button):
-    def on_press(self):
+    def zoom_in(self, root):
         if root.ids['imagescatter'].scale < root.ids['imagescatter'].scale_max:
             root.ids['imagescatter'].scale *= 2
 
 class ZoomOutButton(Button):
-    def on_press(self):
+    def zoom_out(self, root):
         if root.ids['imagescatter'].scale > root.ids['imagescatter'].scale_min:
             root.ids['imagescatter'].scale *= 0.5
 
 class ScatterCenterButton(Button):
-    def on_press(self):
+    def center_scatter(self, root):
         root.ids['imagescatter'].scale = 1
         root.ids['imagescatter'].pos = root.ids['imagescatter'].parent.pos
 
@@ -148,7 +148,7 @@ class PaletteColorButton(Button):
     def pick_color(self, *args):
         print(self.pos)
 
-    def on_touch_down(self, touch):
+    def touch_down_actions(self, touch, root):
         if self.collide_point(*touch.pos):
              if touch.is_double_tap:
                 color_picker_popup = ColorPickerPopup(self)
