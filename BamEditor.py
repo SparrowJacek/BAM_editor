@@ -18,6 +18,10 @@ from kivy.uix.widget import Widget
 from kivy.uix.popup import Popup
 from kivy.graphics import Color, Rectangle
 from kivy.uix.colorpicker import ColorPicker
+from filebrowser import TreeViewBrowser
+from kivy.uix.filechooser import FileChooserIconView, FileChooserListView
+from os.path import expanduser
+from kivy.properties import StringProperty
 
 class RadioButton(ToggleButton):
 
@@ -28,7 +32,9 @@ class RadioButton(ToggleButton):
             ToggleButtonBehavior._do_press(self)
 
 class MainLabel(Label):
-    pass
+    def __init__(self, path=expanduser('~')):
+        super(MainLabel, self).__init__()
+        self.path = path
 
 class ToolBarLabel(Label):
     pass
@@ -37,6 +43,19 @@ class NewFileButton(Button):
     pass
 
 class OpenFileButton(Button):
+    def open_file_browser(self):
+        OpenFilePopup().open()
+
+class OpenFilePopup(Popup):
+    def __init__(self, **kwargs):
+        super(OpenFilePopup, self).__init__( **kwargs)
+
+class OpenFileListChooser(FileChooserListView):
+    def print_path(self, touch):
+        if self.collide_point(*touch.pos):
+            print(self.path)
+
+class OpenFileIconChooser(FileChooserIconView):
     pass
 
 class SaveFileButton(Button):
