@@ -3,6 +3,7 @@ from kivy.uix.behaviors import ToggleButtonBehavior
 
 Config.set('kivy', 'window_icon', r'.\static\program_icon\BamEditor-icon.png')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+import os
 from kivy.app import App
 from random import random as r
 from kivy.uix.floatlayout import FloatLayout
@@ -21,7 +22,8 @@ from kivy.uix.colorpicker import ColorPicker
 from filebrowser import TreeViewBrowser
 from kivy.uix.filechooser import FileChooserIconView, FileChooserListView
 from os.path import expanduser
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ListProperty
+
 
 class RadioButton(ToggleButton):
 
@@ -45,15 +47,18 @@ class NewFileButton(Button):
 class OpenFileButton(Button):
     def open_file_browser(self):
         OpenFilePopup().open()
+    def on_press(self):
+        self.open_file_browser()
 
 class OpenFilePopup(Popup):
     def __init__(self, **kwargs):
-        super(OpenFilePopup, self).__init__( **kwargs)
+        super().__init__( **kwargs)
 
 class OpenFileListChooser(FileChooserListView):
     def print_path(self, touch):
-        if self.collide_point(*touch.pos):
+        if self.collide_point(*touch.pos) and touch.button == 'left':
             print(self.path)
+            print(os.path.isfile(self.path))
 
 class OpenFileIconChooser(FileChooserIconView):
     pass
@@ -105,6 +110,10 @@ class ScatterCenterButton(Button):
 
 class PaintingAreaLabel(Label):
     pass
+
+class MyColorPicker(ColorPicker):
+    color = ListProperty((0.5, 0.5, 1, 1))
+
 
 class ImageScatter(Scatter):
     def on_touch_down(self, touch):
@@ -169,6 +178,7 @@ class PaletteColorButton(Button):
 
     def touch_down_actions(self, touch, root):
         if self.collide_point(*touch.pos):
+             print(type(self.color))
              if touch.is_double_tap:
                 color_picker_popup = ColorPickerPopup(self)
                 color_picker_popup.open()
@@ -183,10 +193,13 @@ class CurrentColorLabel(ToolBarLabel):
 
 class ColorPickerPopup(Popup):
     def __init__(self,my_widget,**kwargs):  # my_widget is now the object where popup was called from.
-        super(ColorPickerPopup, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.my_widget = my_widget
+        self.color = my_widget.color
+        print(type(my_widget.color))
     def dismiss_popup(self, root):
         self.my_widget.color = self.color
+        print(type(self.color))
         root.ids['left_mouse_color'].color = self.color
 
 class ToolInfoLabel(ToolBarLabel):

@@ -27,7 +27,6 @@
 
 <OpenFileButton>:
     size: 32, 32
-    on_press: self.open_file_browser()
     Image:
         source: r'.\static\icons\open-file-icon.png'
         pos: root.x, root.top - self.height
@@ -54,6 +53,7 @@
                     height: self.minimum_height
 
 
+
         TabbedPanel:
             id: tabbedpanel
             x_hint: 0.75
@@ -63,7 +63,7 @@
                 text: 'List view'
                 OpenFileListChooser:
                     id: listview
-                    filters: ['*.jpg']
+                    filters: ['*.bam', '*.bmp']
                     on_touch_down: self.print_path(args[1])
 
             TabbedPanelItem:
@@ -222,8 +222,9 @@
     size_hint: None, None
     size: 400,400
     auto_dismiss: False
+    color: self.color
     on_dismiss: self.dismiss_popup(app.root)
-    ColorPicker:
+    MyColorPicker:
         on_color:root.color = self.color
         Button:
             text: 'Select'
