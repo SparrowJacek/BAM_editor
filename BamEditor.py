@@ -24,6 +24,7 @@ from kivy.uix.filechooser import FileChooserIconView, FileChooserListView
 from os.path import expanduser
 from kivy.properties import StringProperty, ListProperty
 from kivy.lang import Builder
+
 Builder.load_file('BamEditor.kv')
 Builder.load_file('main_toolbar.kv')
 Builder.load_file('toolbox_toolbar.kv')
@@ -31,34 +32,40 @@ Builder.load_file('painting_area.kv')
 Builder.load_file('palette_label.kv')
 Builder.load_file('sequence_frame_label.kv')
 
+
 class RadioButton(ToggleButton):
 
     def _do_press(self):
-
         if self.state == 'normal':
-
             ToggleButtonBehavior._do_press(self)
+
 
 class MainLabel(Label):
     def __init__(self, path=expanduser('~')):
         super(MainLabel, self).__init__()
         self.path = path
 
+
 class ToolBarLabel(Label):
     pass
+
 
 class NewFileButton(Button):
     pass
 
+
 class OpenFileButton(Button):
     def open_file_browser(self):
         OpenFilePopup().open()
+
     def on_press(self):
         self.open_file_browser()
 
+
 class OpenFilePopup(Popup):
     def __init__(self, **kwargs):
-        super().__init__( **kwargs)
+        super().__init__(**kwargs)
+
 
 class OpenFileListChooser(FileChooserListView):
     def print_path(self, touch):
@@ -66,56 +73,72 @@ class OpenFileListChooser(FileChooserListView):
             print(self.path)
             print(os.path.isfile(self.path))
 
+
 class OpenFileIconChooser(FileChooserIconView):
     pass
+
 
 class SaveFileButton(Button):
     pass
 
+
 class UndoButton(Button):
     pass
+
 
 class RedoButton(Button):
     pass
 
+
 class MoveImageButton(RadioButton):
     pass
+
 
 class PencilButton(RadioButton):
     pass
 
+
 class BrushButton(RadioButton):
     pass
+
 
 class EraserButton(RadioButton):
     pass
 
+
 class ColorPickerButton(RadioButton):
     pass
+
 
 class FloodFillButton(RadioButton):
     pass
 
+
 class ImageCenterButton(ToggleButton):
     pass
+
 
 class ZoomInButton(Button):
     def zoom_in(self, root):
         if root.ids['imagescatter'].scale < root.ids['imagescatter'].scale_max:
             root.ids['imagescatter'].scale *= 2
 
+
 class ZoomOutButton(Button):
     def zoom_out(self, root):
         if root.ids['imagescatter'].scale > root.ids['imagescatter'].scale_min:
             root.ids['imagescatter'].scale *= 0.5
+
 
 class ScatterCenterButton(Button):
     def center_scatter(self, root):
         root.ids['imagescatter'].scale = 1
         root.ids['imagescatter'].pos = root.ids['imagescatter'].parent.pos
 
+
 class PaintingAreaLabel(Label):
     pass
+
 
 class MyColorPicker(ColorPicker):
     color = ListProperty((0.5, 0.5, 1, 1))
@@ -164,17 +187,21 @@ class ImageScatter(Scatter):
             self._last_touch_pos[touch] = touch.pos
 
             return True
+
+
 class ImageLabel(Label):
     pass
 
+
 class PaletteInfoToolInfoLabel(ToolBarLabel):
     pass
+
 
 class PaletteLabel(ToolBarLabel):
     def make_palette(self, layout):
         for i in range(0, 256):
             palette_color_button = PaletteColorButton()
-            palette_color_button.color = (i/255, i/255, i/255, 1)
+            palette_color_button.color = (i / 255, i / 255, i / 255, 1)
             layout.add_widget(palette_color_button)
 
 
@@ -184,98 +211,123 @@ class PaletteColorButton(Button):
 
     def touch_down_actions(self, touch, root):
         if self.collide_point(*touch.pos):
-             print(type(self.color))
-             if touch.is_double_tap:
+            print(type(self.color))
+            if touch.is_double_tap:
                 color_picker_popup = ColorPickerPopup(self)
                 color_picker_popup.open()
 
-             if touch.button == "right":
-                 root.ids['right_mouse_color'].color = self.color
-             if touch.button == "left":
-                 root.ids['left_mouse_color'].color = self.color
+            if touch.button == "right":
+                root.ids['right_mouse_color'].color = self.color
+            if touch.button == "left":
+                root.ids['left_mouse_color'].color = self.color
+
 
 class CurrentColorLabel(ToolBarLabel):
     pass
 
+
 class ColorPickerPopup(Popup):
-    def __init__(self,my_widget,**kwargs):  # my_widget is now the object where popup was called from.
+    def __init__(self, my_widget, **kwargs):  # my_widget is now the object where popup was called from.
         super().__init__(**kwargs)
         self.my_widget = my_widget
         self.color = my_widget.color
-        print(type(my_widget.color))
+
     def dismiss_popup(self, root):
         self.my_widget.color = self.color
-        print(type(self.color))
         root.ids['left_mouse_color'].color = self.color
+
 
 class ToolInfoLabel(ToolBarLabel):
     pass
 
+
 class SequenceFrameInfoLabel(ToolBarLabel):
     pass
+
 
 class SequenceFrameTabbedPanel(TabbedPanel):
     pass
 
+
 class ScrollableLabel(Label):
     pass
+
 
 class SequenceLabel(ScrollableLabel):
     pass
 
+
 class SequenceOrderChangeLabel(ToolBarLabel):
     pass
+
 
 class SequenceUpButton(Button):
     pass
 
+
 class SequenceDownButton(Button):
     pass
+
 
 class SequenceAddButton(Button):
     pass
 
+
 class SequenceDeleteButton(Button):
     pass
+
 
 class SequenceFrameButtonsLabel(Label):
     pass
 
+
 class SequenceAnimationPlayButton(RadioButton):
     pass
+
 
 class SequenceAnimationStopButton(RadioButton):
     pass
 
+
 class PreviewAnimationButton(Button):
     pass
+
 
 class FrameLabel(ScrollableLabel):
     pass
 
+
 class FrameOrderChangeLabel(ToolBarLabel):
     pass
+
 
 class FrameUpButton(Button):
     pass
 
+
 class FrameDownButton(Button):
     pass
+
 
 class SequenceFrameAddButton(Button):
     pass
 
+
 class SequenceFrameDeleteButton(Button):
     pass
+
 
 class AllFramesLabel(ScrollableLabel):
     pass
 
+
 class FrameAddButton(Button):
     pass
 
+
 class FrameDeleteButton(Button):
     pass
+
 
 class BamEditor(App):
 
