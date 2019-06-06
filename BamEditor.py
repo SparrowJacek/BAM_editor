@@ -23,7 +23,13 @@ from filebrowser import TreeViewBrowser
 from kivy.uix.filechooser import FileChooserIconView, FileChooserListView
 from os.path import expanduser
 from kivy.properties import StringProperty, ListProperty
-
+from kivy.lang import Builder
+Builder.load_file('BamEditor.kv')
+Builder.load_file('main_toolbar.kv')
+Builder.load_file('toolbox_toolbar.kv')
+Builder.load_file('painting_area.kv')
+Builder.load_file('palette_label.kv')
+Builder.load_file('sequence_frame_label.kv')
 
 class RadioButton(ToggleButton):
 

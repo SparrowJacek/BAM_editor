@@ -1,0 +1,80 @@
+<MainToolbarLabel@ToolBarLabel>:
+    height: 38
+
+<NewFileButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\new-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<OpenFileButton>:
+    size: 32, 32
+    Image:
+        source: r'.\static\icons\open-file-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<OpenFilePopup>:
+    size_hint: None, None
+    size: 800,600
+    title: 'Open file'
+    id: openfilepopup
+
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 5
+        Splitter:
+            sizable_from: 'right'
+            size_hint: (.25, 1)
+            id: splitter
+            ScrollView:
+                TreeViewBrowser:
+                    browser: tabbedpanel
+                    id: link_tree
+                    size_hint_y: None
+                    height: self.minimum_height
+
+
+
+        TabbedPanel:
+            id: tabbedpanel
+            x_hint: 0.75
+            do_default_tab: False
+
+            TabbedPanelItem:
+                text: 'List view'
+                OpenFileListChooser:
+                    id: listview
+                    filters: ['*.bam', '*.bmp']
+                    on_touch_down: self.print_path(args[1]) ####################################################################
+
+            TabbedPanelItem:
+                text: 'Icon view'
+                OpenFileIconChooser:
+
+
+<PathViewLabel>:
+    on_touch_down: self.set_path(args[1], self.parent.browser.tab_list)  ############################
+
+
+<SaveFileButton>:
+    size: 32, 32
+    Image:
+        source: r'./static/icons/save-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<UndoButton>:
+    size: 32, 32
+    Image:
+        source: r'./static/icons/undo-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<RedoButton>:
+    size: 32, 32
+    Image:
+        source: r'./static/icons/redo-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size

@@ -1,0 +1,92 @@
+<ToolBoxLabel@ToolBarLabel>:
+    width: 38
+
+<MoveImageButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Hand-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<PencilButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Pencil-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<EraserButton>:
+    group: 'toolbox_tool'
+
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Eraser-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<BrushButton>:
+    group: 'toolbox_tool'
+
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Brush-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ColorPickerButton>:
+    group: 'toolbox_tool'
+
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Dropper-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<FloodFillButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Fill-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ImageCenterButton>:
+    group: 'toolbox_tool'
+
+    size: 32, 32
+    Image:
+        source: r'./static/icons/Center-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ZoomInButton>:
+    size: 32, 32
+    on_press: self.zoom_in(app.root)
+    Image:
+        source: r'./static/icons/Zoom-in-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ZoomOutButton>:
+    size: 32, 32
+    on_press: self.zoom_out(app.root)
+    Image:
+        source: r'./static/icons/Zoom-out-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
+
+<ScatterCenterButton>:
+    size: 32, 32
+    on_press: self.center_scatter(app.root)
+    Image:
+        source: r'./static/icons/Revert-center-icon.png'
+        pos: root.x, root.top - self.height
+        size: self.parent.size
