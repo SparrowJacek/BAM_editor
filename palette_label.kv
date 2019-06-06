@@ -1,10 +1,13 @@
-<PaletteInfoToolInfoLabel>:
+<PaletteInfoToolInfoLabel@ToolBarLabel>:
     height: 200
 
-<PaletteLabel>:
+<PaletteLabel@ToolBarLabel>:
     height: 160
     width: 640
 
+<ColorButtonsGridLayout>
+    cols: 32
+    rows: 8
 
 <PaletteColorButton>:
     size:(20,20)
@@ -34,7 +37,7 @@
             on_press: root.dismiss()
 
 
-<CurrentColorLabel>:
+<CurrentColorLabel@ToolBarLabel>:
     size: (80, 80)
     canvas.after:
         Color:
@@ -43,6 +46,6 @@
             pos: self.x + 3 , self.y + 3
             size: self.width - 6, self.height - 6
 
-<ToolInfoLabel>:
+<ToolInfoLabel@ToolBarLabel>:
     height: 120
     width: 320

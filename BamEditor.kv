@@ -1,5 +1,5 @@
 # File name: BamEditor.py
-<ToolBarLabel>
+<ToolBarLabel@Label>
     bcolor: 103/255, 97/255, 97/255, 1
     canvas.before:
         Color:
@@ -99,11 +99,7 @@
             id: palettelabel
             pos: (self.parent.x + 160, self.parent.y + 20)
 
-            GridLayout:
-                id: palettelayout
-                cols: 32
-                rows: 8
-
+            ColorButtonsGridLayout:
                 pos: self.parent.x , self.parent.y
                 size: self.parent.width, self.parent.height
 
