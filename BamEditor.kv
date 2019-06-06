@@ -1,4 +1,6 @@
 # File name: BamEditor.py
+#:import filechooser kivy.uix.filechooser
+#:import filebrowser filebrowser
 <ToolBarLabel@Label>
     bcolor: 103/255, 97/255, 97/255, 1
     canvas.before:
@@ -24,7 +26,7 @@
 
 
 
-<MainLabel>:
+<MainLabel@Label>:
     PaintingAreaLabel:
         pos: 38, root.top - 38 - self.height
         width: root.width - root.ids.toolbox.width - root.ids.sequenceframeinfolabel.width

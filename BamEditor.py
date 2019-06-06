@@ -307,8 +307,6 @@ class BamEditor(App):
 
     def build(self):
         main_label = MainLabel()
-        #
-        # main_label.ids['palettelabel'].make_palette(main_label.ids['palettelayout'])
         return main_label
 
 
