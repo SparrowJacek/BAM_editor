@@ -1,5 +1,8 @@
+from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.tabbedpanel import TabbedPanel
+
+from shared_widgets import RadioButton
 
 
 class SequenceFrameTabbedPanel(TabbedPanel):

@@ -1,6 +1,8 @@
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 
+from shared_widgets import RadioButton
+
 
 class MoveImageButton(RadioButton):
     pass
