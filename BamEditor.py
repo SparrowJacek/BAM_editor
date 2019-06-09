@@ -1,10 +1,11 @@
 from kivy.config import Config
-from kivy.uix.behaviors import ToggleButtonBehavior
 
 Config.set('kivy', 'window_icon', r'.\static\program_icon\BamEditor-icon.png')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 import os
 from kivy.app import App
+from kivy.clock import Clock
+from kivy.uix.behaviors import ToggleButtonBehavior
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
@@ -192,20 +193,32 @@ class ColorButtonsGridLayout(GridLayout):
 
 
 class PaletteColorButton(Button):
-    def pick_color(self, *args):
-        print(self.pos)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.current_touch = None
 
     def touch_down_actions(self, touch, root):
         if self.collide_point(*touch.pos):
-            print(type(self.color))
-            if touch.is_double_tap:
-                color_picker_popup = ColorPickerPopup(self)
-                color_picker_popup.open()
+            if self.current_touch is not None:
+                Clock.unschedule(self.on_single_press)
+                self.on_double_press()
+                self.current_touch = None
+            else:
+                self.current_touch = touch
+                Clock.schedule_once(lambda dt: self.on_single_press(touch, root), 0.1)
 
-            if touch.button == "right":
-                root.ids['right_mouse_color'].color = self.color
-            if touch.button == "left":
-                root.ids['left_mouse_color'].color = self.color
+    def on_double_press(self):
+        color_picker_popup = ColorPickerPopup(self)
+        color_picker_popup.open()
+
+    def on_single_press(self, touch, root):
+        if touch.button == "right":
+            root.ids['right_mouse_color'].color = self.color
+        if touch.button == "left":
+            root.ids['left_mouse_color'].color = self.color
+
+    def pick_color(self, *args):
+        print(self.pos)
 
 
 class ColorPickerPopup(Popup):
