@@ -7,7 +7,6 @@ from kivy.uix.label import Label
 from os.path import expanduser
 from kivy.lang import Builder
 
-Builder.load_file('BamEditor.kv')
 Builder.load_file('main_toolbar.kv')
 Builder.load_file('toolbox_toolbar.kv')
 Builder.load_file('painting_area.kv')

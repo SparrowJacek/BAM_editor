@@ -1,7 +1,5 @@
 from kivy.app import App
 from kivy.clock import Clock
-from kivy.input.providers.wm_touch import WM_MotionEvent
-from kivy.properties import ListProperty
 from kivy.uix.button import Button
 from kivy.uix.colorpicker import ColorPicker
 from kivy.uix.gridlayout import GridLayout
@@ -10,7 +8,6 @@ from kivy.uix.popup import Popup
 
 class ColorButtonsGridLayout(GridLayout):
     def __init__(self, **kwargs):
-        print('yup')
         super().__init__(**kwargs)
         for i in range(0, 256):
             palette_color_button = PaletteColorButton()
@@ -43,7 +40,6 @@ class PaletteColorButton(Button):
         color_picker = MyColorPicker(color_picker_popup, self)
         color_picker_popup.add_widget(color_picker)
         color_picker_popup.open()
-
 
     def on_single_press(self, touch):
         try:
