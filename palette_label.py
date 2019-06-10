@@ -1,9 +1,10 @@
-from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.uix.colorpicker import ColorPicker
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.popup import Popup
+
+from shared_logics import get_widget_with_id
 
 
 class ColorButtonsGridLayout(GridLayout):
@@ -27,13 +28,13 @@ class PaletteColorButton(Button):
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            print(self.color)
             if self.current_touch is not None:
+                Clock.unschedule(self.scheduled_action)
                 self.on_double_press()
             else:
                 self.current_touch = touch
                 self.scheduled_action = Clock.schedule_once(lambda dt: self.on_single_press(touch),
-                                                            0.2)
+                                                            0.25)
 
     def on_double_press(self):
         color_picker_popup = ColorPickerPopup()
@@ -50,12 +51,12 @@ class PaletteColorButton(Button):
             self.reset_action_params()
 
     def set_mouse_color(self, touch):
-        app = App.get_running_app()
-        root_label = app.root
+        right_mouse_color = get_widget_with_id('right_mouse_color')
+        left_mouse_color = get_widget_with_id('left_mouse_color')
         if touch.button == "right":
-            root_label.ids['right_mouse_color'].color = self.color
+            right_mouse_color.color = self.color
         if touch.button == "left":
-            root_label.ids['left_mouse_color'].color = self.color
+            left_mouse_color.color = self.color
 
     def pick_color(self, *args):
         print(self.pos)
@@ -82,5 +83,11 @@ class MyColorPickerButton(Button):
             parent = parent.parent
 
     def on_press(self):
+        right_mouse_color = get_widget_with_id('right_mouse_color')
+        left_mouse_color = get_widget_with_id('left_mouse_color')
+        for col_widget in (right_mouse_color, left_mouse_color):
+            if col_widget.color == self.parent.linked_button.color:
+                col_widget.color = self.parent.color
+        self.parent.linked_button.color = self.parent.color
         parent_popup = self.get_popup()
         parent_popup.dismiss()
