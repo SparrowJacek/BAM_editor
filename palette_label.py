@@ -36,7 +36,9 @@ class PaletteColorButton(Button):
                                                             0.2)
 
     def on_double_press(self):
-        color_picker_popup = ColorPickerPopup(self)
+        color_picker_popup = ColorPickerPopup()
+        color_picker = MyColorPicker(self)
+        color_picker_popup.add_widget(color_picker)
         color_picker_popup.open()
 
     def on_single_press(self, touch, root):
@@ -51,15 +53,13 @@ class PaletteColorButton(Button):
 
 
 class ColorPickerPopup(Popup):
-    def __init__(self, my_widget, **kwargs):  # my_widget is now the object where popup was called from.
-        super().__init__(**kwargs)
-        self.my_widget = my_widget
-        self.color = my_widget.color
-
     def dismiss_popup(self, root):
         self.my_widget.color = self.color
         root.ids['left_mouse_color'].color = self.color
 
 
 class MyColorPicker(ColorPicker):
-    color = ListProperty((0.5, 0.5, 1, 1))
+    def __init__(self, linked_button, **kwargs):
+        super().__init__(**kwargs)
+        self.linked_button = linked_button
+        self.color = linked_button.color
