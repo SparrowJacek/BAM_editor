@@ -31,16 +31,6 @@ class ImageScatter(Scatter):
                 return True
             touch.pop()
 
-            if not self.do_translation_x and \
-                    not self.do_translation_y and \
-                    not self.do_rotation and \
-                    not self.do_scale:
-                return False
-
-            if self.do_collide_after_children:
-                if not self.collide_point(x, y):
-                    return False
-
             if 'multitouch_sim' in touch.profile:
                 touch.multitouch_sim = True
             self._bring_to_front(touch)
