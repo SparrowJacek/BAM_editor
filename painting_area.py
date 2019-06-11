@@ -1,3 +1,5 @@
+from kivy.graphics import Line
+from kivy.graphics.context_instructions import Color
 from kivy.uix.label import Label
 from kivy.uix.scatter import Scatter
 
@@ -43,3 +45,10 @@ class ImageScatter(Scatter):
 
 class ImageLabel(Label):
     pass
+    # def on_touch_down(self, touch):
+    #     with self.canvas:
+    #         Color(1,0,1,1)
+    #         touch.ud['line'] = Line(points=(touch.x, touch.y), width=10)
+    #
+    # def on_touch_move(self, touch):
+    #     touch.ud['line'].points += (touch.x, touch.y)

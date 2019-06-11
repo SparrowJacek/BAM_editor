@@ -1,6 +1,7 @@
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 
+from shared_logics import get_widget_with_id
 from shared_widgets import RadioButton
 
 
@@ -33,18 +34,21 @@ class ImageCenterButton(ToggleButton):
 
 
 class ZoomInButton(Button):
-    def zoom_in(self, root):
-        if root.ids['imagescatter'].scale < root.ids['imagescatter'].scale_max:
-            root.ids['imagescatter'].scale *= 2
+    def on_press(self):
+        im_scatter = get_widget_with_id('imagescatter')
+        if im_scatter.scale < im_scatter.scale_max:
+            im_scatter.scale *= 2
 
 
 class ZoomOutButton(Button):
-    def zoom_out(self, root):
-        if root.ids['imagescatter'].scale > root.ids['imagescatter'].scale_min:
-            root.ids['imagescatter'].scale *= 0.5
+    def on_press(self):
+        im_scatter = get_widget_with_id('imagescatter')
+        if im_scatter.scale > im_scatter.scale_min:
+            im_scatter.scale *= 0.5
 
 
 class ScatterCenterButton(Button):
-    def center_scatter(self, root):
-        root.ids['imagescatter'].scale = 1
-        root.ids['imagescatter'].pos = root.ids['imagescatter'].parent.pos
+    def on_press(self):
+        im_scatter = get_widget_with_id('imagescatter')
+        im_scatter.scale = 1
+        im_scatter.pos = im_scatter.parent.pos
