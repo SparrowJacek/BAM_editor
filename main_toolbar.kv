@@ -54,7 +54,7 @@
             TabbedPanelItem:
                 text: 'Icon view'
                 OpenFileIconChooser:
-
+                    filters: ['*.bam', '*.bmp']
 
 <PathViewLabel>:
     on_touch_down: self.set_path(args[1], self.parent.browser.tab_list)  ############################
