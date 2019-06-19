@@ -26,6 +26,7 @@ class OpenFileListChooser(FileChooserListView):
     def print_path(self, touch):
         if self.collide_point(*touch.pos) and touch.button == 'left':
             print(self.path)
+            print(os.path.isfile(self.path))
 
 
 class OpenFileIconChooser(FileChooserIconView):
