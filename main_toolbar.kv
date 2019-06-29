@@ -24,37 +24,60 @@
     id: openfilepopup
 
     BoxLayout:
-        orientation: 'horizontal'
         spacing: 5
-        Splitter:
-            sizable_from: 'right'
-            size_hint: (.25, 1)
-            id: splitter
-            ScrollView:
-                TreeViewBrowser:
-                    browser: tabbedpanel
-                    id: link_tree
-                    size_hint_y: None
-                    height: self.minimum_height
+        orientation: 'vertical'
+        BoxLayout:
+
+            orientation: 'horizontal'
+            spacing: 5
+            Splitter:
+                sizable_from: 'right'
+                size_hint: (.25, 1)
+                id: splitter
+                ScrollView:
+                    TreeViewBrowser:
+                        browser: tabbedpanel
+                        id: link_tree
+                        size_hint_y: None
+                        height: self.minimum_height
+
+
+            TabbedPanel:
+                id: tabbedpanel
+                x_hint: 0.75
+                do_default_tab: False
+
+                TabbedPanelItem:
+                    text: 'List view'
+                    OpenFileListChooser:
+                        id: listview
+                        filters: ['*.bam', '*.bmp']
+                        on_touch_down: self.print_path(args[1]) ####################################################################
+
+                TabbedPanelItem:
+                    text: 'Icon view'
+                    OpenFileIconChooser:
+                        filters: ['*.bam', '*.bmp']
+        PrettyBoxLayer:
+            spacing: 2
+            size_hint_y: None
+            height: 38
+
+
+            FilePathTextInput:
+
+                height: 32
+                size_hint_y: None
+                pos_hint: {'x': .5, 'y': .1}
+            FileSubmitButton:
+
+                height: 32
+                size_hint_x: None
+                width: 80
 
 
 
-        TabbedPanel:
-            id: tabbedpanel
-            x_hint: 0.75
-            do_default_tab: False
 
-            TabbedPanelItem:
-                text: 'List view'
-                OpenFileListChooser:
-                    id: listview
-                    filters: ['*.bam', '*.bmp']
-                    on_touch_down: self.print_path(args[1]) ####################################################################
-
-            TabbedPanelItem:
-                text: 'Icon view'
-                OpenFileIconChooser:
-                    filters: ['*.bam', '*.bmp']
 
 <PathViewLabel>:
     on_touch_down: self.set_path(args[1], self.parent.browser.tab_list)  ############################
