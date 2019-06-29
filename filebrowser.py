@@ -5,10 +5,14 @@ from kivy.uix.treeview import TreeView, TreeViewLabel
 
 
 def get_drives():
-    drive_letters = [drive_letter[:-1] for drive_letter in win32api.GetLogicalDriveStrings().split('\0') if
-                     drive_letter and check_if_drive_not_empty(drive_letter[:-1])]
-    drive_names = [win32api.GetVolumeInformation('{0}\\'.format(drive_letter))[0] for drive_letter in drive_letters]
-    drives_with_names = ['{0}({1})'.format(name, letter) for name, letter in zip(drive_names, drive_letters)]
+    drive_letters = [drive_letter[:-1] for drive_letter
+                     in win32api.GetLogicalDriveStrings().split('\0')
+                     if drive_letter
+                     and check_if_drive_not_empty(drive_letter[:-1])]
+    drive_names = [win32api.GetVolumeInformation('{0}\\'.format(drive_letter))[0] for drive_letter
+                   in drive_letters]
+    drives_with_names = ['{0}({1})'.format(name, letter) for name, letter
+                         in zip(drive_names, drive_letters)]
     return zip(drives_with_names, drive_letters)
 
 
@@ -23,8 +27,9 @@ def check_if_drive_not_empty(drive_letter):
 def get_popular_directories():
     user_path = os.path.expanduser('~')
     popular_directory_names = ['Desktop', 'Downloads', 'Documents']
-    return ((name, os.path.join(user_path, name)) for name in popular_directory_names if
-            os.path.isdir(os.path.join(user_path, name)))
+    return ((name, os.path.join(user_path, name)) for name
+            in popular_directory_names
+            if os.path.isdir(os.path.join(user_path, name)))
 
 
 class TreeViewBrowser(TreeView):
@@ -52,6 +57,9 @@ class PathViewLabel(TreeViewLabel):
     def __init__(self, path, **kwargs):
         super(PathViewLabel, self).__init__(**kwargs)
         self.path = path
+
+    def on_touch_down(self, touch):
+            self.set_path(touch, self.parent.browser.tab_list)
 
     def set_path(self, touch, file_choosers):
         if self.collide_point(*touch.pos) and touch.button == 'left':

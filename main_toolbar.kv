@@ -26,15 +26,18 @@
     BoxLayout:
         spacing: 5
         orientation: 'vertical'
-        BoxLayout:
 
+        BoxLayout:
             orientation: 'horizontal'
             spacing: 5
+
             Splitter:
                 sizable_from: 'right'
                 size_hint: (.25, 1)
                 id: splitter
+
                 ScrollView:
+
                     TreeViewBrowser:
                         browser: tabbedpanel
                         id: link_tree
@@ -49,13 +52,14 @@
 
                 TabbedPanelItem:
                     text: 'List view'
+
                     OpenFileListChooser:
                         id: listview
                         filters: ['*.bam', '*.bmp']
-                        on_touch_down: self.print_path(args[1]) ####################################################################
 
                 TabbedPanelItem:
                     text: 'Icon view'
+
                     OpenFileIconChooser:
                         filters: ['*.bam', '*.bmp']
         PrettyBoxLayer:
@@ -63,24 +67,17 @@
             size_hint_y: None
             height: 38
 
-
             FilePathTextInput:
-
                 height: 32
                 size_hint_y: None
                 pos_hint: {'x': .5, 'y': .1}
-            FileSubmitButton:
 
+            FileSubmitButton:
                 height: 32
                 size_hint_x: None
                 width: 80
 
 
-
-
-
-<PathViewLabel>:
-    on_touch_down: self.set_path(args[1], self.parent.browser.tab_list)  ############################
 
 
 <SaveFileButton>:
