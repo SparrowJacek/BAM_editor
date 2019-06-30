@@ -3,6 +3,8 @@ from kivy.uix.filechooser import FileChooserIconView, FileChooserListView
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 
+from shared_logics import get_widget_with_id
+
 
 class NewFileButton(Button):
     pass
@@ -22,9 +24,8 @@ class OpenFilePopup(Popup):
 
 
 class OpenFileListChooser(FileChooserListView):
-    def print_path(self, touch):
-        if self.collide_point(*touch.pos) and touch.button == 'left':
-            pass
+    def on_submit(self, selected, touch):
+        pass
 
 
 class FilePathTextInput(TextInput):

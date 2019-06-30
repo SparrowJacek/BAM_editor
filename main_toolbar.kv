@@ -39,45 +39,49 @@
                 ScrollView:
 
                     TreeViewBrowser:
-                        browser: tabbedpanel
+                        browser: open_file_chooser
                         id: link_tree
                         size_hint_y: None
                         height: self.minimum_height
 
 
-            TabbedPanel:
-                id: tabbedpanel
-                x_hint: 0.75
-                do_default_tab: False
+            BoxLayout:
+                orientation: 'vertical'
 
-                TabbedPanelItem:
-                    text: 'List view'
+                BoxLayout:
+                    size_hint_y: None
+                    height: sp(52)
 
-                    OpenFileListChooser:
-                        id: listview
-                        filters: ['*.bam', '*.bmp']
+                    Button:
+                        text: 'Icon View'
+                        on_press: open_file_chooser.view_mode = 'icon'
+                    Button:
+                        text: 'List View'
+                        on_press: open_file_chooser.view_mode = 'list'
 
-                TabbedPanelItem:
-                    text: 'Icon view'
+                FileChooser:
+                    id: open_file_chooser
+                    filters: ['*.bmp', '*.BMP', '*.bam', '*.BAM']
+                    FileChooserIconLayout
+                    FileChooserListLayout
 
-                    OpenFileIconChooser:
-                        filters: ['*.bam', '*.bmp']
         PrettyBoxLayer:
             spacing: 2
             size_hint_y: None
             height: 38
 
             FilePathTextInput:
+                id: 'filepath_input'
                 height: 32
                 size_hint_y: None
                 pos_hint: {'x': .5, 'y': .1}
+                multiline: False
 
             FileSubmitButton:
                 height: 32
                 size_hint_x: None
                 width: 80
-
-
+                text: 'Open'
 
 
 <SaveFileButton>:

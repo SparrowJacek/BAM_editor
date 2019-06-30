@@ -4,6 +4,8 @@ from kivy.uix.togglebutton import ToggleButton
 from shared_logics import get_widget_with_id
 from shared_widgets import RadioButton
 
+class ToolButton(RadioButton):
+    pass
 
 class MoveImageButton(RadioButton):
     pass

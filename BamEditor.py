@@ -13,6 +13,7 @@ Builder.load_file('painting_area.kv')
 Builder.load_file('palette_label.kv')
 Builder.load_file('sequence_frame_label.kv')
 
+current_tool = None
 
 class MainLabel(Label):
     def __init__(self, path=expanduser('~')):

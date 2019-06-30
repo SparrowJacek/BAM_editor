@@ -10,6 +10,7 @@ class PaintingAreaLabel(Label):
 
 class ImageScatter(Scatter):
     def on_touch_down(self, touch):
+        global current_tool
         if self.collide_point(*touch.pos):
             if touch.button == 'scrollup':
                 if self.scale > self.scale_min:
@@ -33,7 +34,7 @@ class ImageScatter(Scatter):
                 return True
             touch.pop()
 
-            if 'multitouch_sim' in touch.profile:
+            if 'multitouch_sim' in touch.profile and current_tool == '':
                 touch.multitouch_sim = True
             self._bring_to_front(touch)
             touch.grab(self)

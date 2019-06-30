@@ -1,5 +1,5 @@
-import win32api
 import os
+import win32api
 
 from kivy.uix.treeview import TreeView, TreeViewLabel
 
@@ -59,9 +59,5 @@ class PathViewLabel(TreeViewLabel):
         self.path = path
 
     def on_touch_down(self, touch):
-            self.set_path(touch, self.parent.browser.tab_list)
-
-    def set_path(self, touch, file_choosers):
         if self.collide_point(*touch.pos) and touch.button == 'left':
-            for file_chooser in file_choosers:
-                file_chooser.content.path = self.path
+            self.parent.browser.path = self.path
