@@ -3,6 +3,8 @@ from kivy.uix.button import Button
 from shared_logics import get_widget_with_id
 from shared_widgets import RadioButton
 
+class ToolButton(RadioButton):
+    pass
 
 class ToolButton(RadioButton):
     def __init__(self, tool_name, **kwargs):

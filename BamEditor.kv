@@ -16,6 +16,16 @@
             pos: self.x + 3, self.y +3
             size: self.width-6, self.height-6
 
+<PrettyBoxLayer@BoxLayout>
+    bcolor: 103/255, 97/255, 97/255, 1
+    canvas.before:
+        Color:
+            rgba: 73/255, 67/255, 67/255, 1
+        Rectangle:
+            pos: self.x - 1, self.y - 1
+            size: self.width+2, self.height+2
+            Color:
+                rgba: self.bcolor
 
 <MainLabel@Label>:
     PaintingAreaLabel:
