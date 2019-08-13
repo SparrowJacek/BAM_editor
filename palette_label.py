@@ -19,10 +19,9 @@ class ColorButtonsGridLayout(GridLayout):
 class PaletteColorButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.current_touch = None
-        self.scheduled_action = None
+        self.reset_action_params_to_default()
 
-    def reset_action_params(self):
+    def reset_action_params_to_default(self):
         self.current_touch = None
         self.scheduled_action = None
 
@@ -41,6 +40,7 @@ class PaletteColorButton(Button):
         color_picker = MyColorPicker(color_picker_popup, self)
         color_picker_popup.add_widget(color_picker)
         color_picker_popup.open()
+        self.reset_action_params_to_default()
 
     def on_single_press(self, touch):
         try:
@@ -48,7 +48,7 @@ class PaletteColorButton(Button):
         except AttributeError:
             pass
         finally:
-            self.reset_action_params()
+            self.reset_action_params_to_default()
 
     def set_mouse_color(self, touch):
         right_mouse_color = get_widget_with_id('right_mouse_color')
